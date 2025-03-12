@@ -1,0 +1,21 @@
+.navbar-custom {
+    background-color: #007bff; /* Azul claro */
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: white;
+}
+
+.navbar-custom .btn-light {
+    background-color: #d3d3d3; /* Gris claro */
+}
+
+.popular-titles {
+    background-color: grey;
+    padding: 10px;
+}
+
+.popular-titles h5 {
+    color: white;
+}
