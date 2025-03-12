@@ -52,9 +52,9 @@ export default function Series() {
     if (status === 'succeeded') {
         const filteredMovies = movies && Array.isArray(movies.entries)
             ? movies.entries.filter(movie =>
-                movie.programType === "series" &&
-                movie.releaseYear >= 2010 &&
-                (yearFilter ? movie.releaseYear === yearFilter.getFullYear() : true)
+                movie.programType === "series" && 
+                (!yearFilter || movie.releaseYear === yearFilter.getFullYear()) && 
+                (!yearFilter ? movie.releaseYear >= 2010 : true)
             )
             : [];
     
@@ -153,6 +153,5 @@ export default function Series() {
             </Container>
         );
     }
-
     return null;
 }

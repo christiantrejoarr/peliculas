@@ -50,20 +50,18 @@ export default function Peliculas() {
     };
 
     if (status === 'succeeded') {
-        // Filtramos las películas por tipo de película, releaseYear >= 2010, y el año de filtro
         const filteredMovies = movies && Array.isArray(movies.entries)
             ? movies.entries.filter(movie =>
-                movie.programType === "movie" &&
-                movie.releaseYear >= 2010 &&
-                (yearFilter ? movie.releaseYear === yearFilter.getFullYear() : true)
+                movie.programType === "movie" && 
+                (!yearFilter || movie.releaseYear === yearFilter.getFullYear()) && 
+                (!yearFilter ? movie.releaseYear >= 2010 : true) 
             )
             : [];
     
-        // Ordenar las películas por título (orden alfanumérico ascendente)
         const sortedMovies = filteredMovies.sort((a, b) => {
-            if (a.title < b.title) return -1; // a viene antes que b
-            if (a.title > b.title) return 1;  // b viene antes que a
-            return 0; // son iguales
+            if (a.title < b.title) return -1; 
+            if (a.title > b.title) return 1;  
+            return 0; 
         });
     
         const totalMovies = sortedMovies.length;
