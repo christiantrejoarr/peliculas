@@ -1,7 +1,20 @@
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom'; 
 import '../styles/header.css';
 
 export default function Header() {
+    const location = useLocation(); 
+
+    const getTitle = () => {
+        if (location.pathname === "/series") {
+            return "Popular Series";
+        } else if (location.pathname === "/peliculas") {
+            return "Popular Movies";
+        } else {
+            return "Popular Titles"; 
+        }
+    };
+
     return (
         <>
             <Navbar className="navbar-custom" expand="lg">
@@ -15,7 +28,7 @@ export default function Header() {
             </Navbar>
             <div className="popular-titles">
                 <Container>
-                    <h5>Popular titles</h5>
+                    <h5>{getTitle()}</h5> 
                 </Container>
             </div>
         </>

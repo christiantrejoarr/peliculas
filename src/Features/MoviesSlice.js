@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchMovies } from './MoviesApi';
-// Estado inicial
 const initialState = {
   movies: [],
   status: 'idle', 

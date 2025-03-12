@@ -6,19 +6,21 @@ import Peliculas from '../Pages/Peliculas';
 import NotFound from '../Pages/NotFound';
 import Index from '../Pages/Index';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/App.css'; 
+import '../styles/App.css';
 
 export default function App() {
     return (
         <div className="app-container">
             <Header />
 
-            <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/series" element={<Series />} />
-                <Route path="/peliculas" element={<Peliculas />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
+            <main className="main-content">
+                <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/series" element={<Series />} />
+                    <Route path="/peliculas" element={<Peliculas />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </main>
 
             <Footer />
         </div>

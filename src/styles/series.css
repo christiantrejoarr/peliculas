@@ -1,9 +1,79 @@
-.movie-row {
-    transition: opacity 0.3s, border 0.3s;
+.card {
+    width: 100%;  
+    height: auto; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto; 
+    transition: opacity 0.3s ease, border 0.3s ease; 
 }
 
-.movie-row:hover {
-    opacity: 0.7;
-    border: 1px solid white;
-    cursor: pointer;
+.card:hover {
+    opacity: 0.7; 
+    border: 2px solid white; 
+}
+
+.card-img-top {
+    height: 200px; 
+    object-fit: cover;
+}
+
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer; 
+}
+
+.card-text {
+    font-size: 0.9rem;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pagination {
+    display: flex;
+    list-style-type: none;  
+    padding: 0;
+    margin: 0;
+    justify-content: center; 
+}
+
+.pagination li {
+    margin: 0 5px;  
+}
+
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 5px 10px; 
+    text-decoration: none;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #333;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .previous, .pagination .next {
+    font-weight: bold;
+}
+
+.pagination .disabled a {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.text-end {
+    text-align: right;
 }

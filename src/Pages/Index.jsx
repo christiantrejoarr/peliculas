@@ -1,16 +1,27 @@
 import { Link } from 'react-router-dom';
+import '../styles/index.css'; 
 
 export default function Index() {
     return (
-        <div>
-            <h1>Películas</h1>
-            <p>Explora nuestra colección de películas.</p>
-            <nav>
-                <ul>
-                    <li><Link to="/series">Series</Link></li>
-                    <li><Link to="/peliculas">Películas</Link></li>
-                </ul>
-            </nav>
+        <div className="index-container">
+            <div className="button-container">
+                <div className="button-wrapper">
+                    <Link to="/series" className="button-link">
+                        <div className="button-content">
+                            <div className="button-title">Series</div>
+                        </div>
+                    </Link>
+                    <div className="button-subtitle">Popular Series</div>
+                </div>
+                <div className="button-wrapper">
+                    <Link to="/peliculas" className="button-link">
+                        <div className="button-content">
+                            <div className="button-title">Movies</div>
+                        </div>
+                    </Link>
+                    <div className="button-subtitle">Popular Movies</div>
+                </div>
+            </div>
         </div>
     );
 }
