@@ -1,0 +1,51 @@
+.index-container {
+    text-align: left;
+    padding: 20px;
+}
+
+.index-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+    margin-left: 50px; /* Ajusta este valor según sea necesario */
+}
+
+.button-wrapper {
+    text-align: center;
+}
+
+.button-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.button-content {
+    width: 150px;
+    height: 200px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.button-content:hover {
+    transform: scale(1.05);
+}
+
+.button-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.button-subtitle {
+    font-size: 14px;
+    margin-top: 10px;
+}
