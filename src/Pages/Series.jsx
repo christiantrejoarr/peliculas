@@ -54,28 +54,34 @@ export default function Series() {
             ? movies.entries.filter(movie =>
                 movie.programType === "series" &&
                 movie.releaseYear >= 2010 &&
-                (yearFilter ? movie.releaseYear === yearFilter.getFullYear() : true) 
+                (yearFilter ? movie.releaseYear === yearFilter.getFullYear() : true)
             )
             : [];
-
-        const totalMovies = filteredMovies.length;
+    
+        const sortedMovies = filteredMovies.sort((a, b) => {
+            if (a.title < b.title) return -1; 
+            if (a.title > b.title) return 1;  
+            return 0; 
+        });
+    
+        const totalMovies = sortedMovies.length;
         const offset = currentPage * itemsPerPage;
-        const currentItems = filteredMovies.slice(offset, offset + itemsPerPage);
-
+        const currentItems = sortedMovies.slice(offset, offset + itemsPerPage);
+    
         return (
             <Container ref={ref}>
                 <Row className="g-3 mb-3">
                     <Col sm={6} md={4} lg={3}>
                         <Form.Group controlId="yearFilter">
                             <Form.Label>Filtrar por año</Form.Label>
-                            <div className="d-flex flex-column"> 
+                            <div className="d-flex flex-column">
                                 <DatePicker
                                     selected={yearFilter}
                                     onChange={handleYearChange}
                                     showYearPicker
                                     dateFormat="yyyy"
                                     placeholderText="Selecciona un año"
-                                    className="form-control" 
+                                    className="form-control"
                                     yearItemNumber={12}
                                     minDate={new Date("1801-01-01")}
                                     maxDate={new Date()}
@@ -83,7 +89,7 @@ export default function Series() {
                             </div>
                         </Form.Group>
                     </Col>
-
+    
                     <Col sm={6} md={4} lg={3}>
                         <Form.Group controlId="itemsPerPage">
                             <Form.Label>Resultados por página</Form.Label>
@@ -94,7 +100,7 @@ export default function Series() {
                             </Form.Control>
                         </Form.Group>
                     </Col>
-
+    
                     <Col className="ms-auto">
                         <ReactPaginate
                             previousLabel={'Anterior'}
@@ -111,7 +117,7 @@ export default function Series() {
                         />
                     </Col>
                 </Row>
-
+    
                 <Row className="g-4">
                     {currentItems.map((movie, index) => (
                         <Col key={index} sm={6} md={4} lg={3} xl={2}>
@@ -124,20 +130,7 @@ export default function Series() {
                         </Col>
                     ))}
                 </Row>
-
-                {/* <Overlay target={target} show={show} placement="right">
-                    {(props) => (
-                        <Tooltip id="overlay-example" {...props}>
-                            {selectedMovie && (
-                                <div>
-                                    <h5>{selectedMovie.title}</h5>
-                                    <p>{selectedMovie.description}</p>
-                                </div>
-                            )}
-                        </Tooltip>
-                    )}
-                </Overlay> */}
-
+    
                 <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedMovie?.title}</Modal.Title>

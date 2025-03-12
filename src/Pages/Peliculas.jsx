@@ -50,32 +50,40 @@ export default function Peliculas() {
     };
 
     if (status === 'succeeded') {
+        // Filtramos las películas por tipo de película, releaseYear >= 2010, y el año de filtro
         const filteredMovies = movies && Array.isArray(movies.entries)
             ? movies.entries.filter(movie =>
                 movie.programType === "movie" &&
                 movie.releaseYear >= 2010 &&
-                (yearFilter ? movie.releaseYear === yearFilter.getFullYear() : true) 
+                (yearFilter ? movie.releaseYear === yearFilter.getFullYear() : true)
             )
             : [];
-
-        const totalMovies = filteredMovies.length;
+    
+        // Ordenar las películas por título (orden alfanumérico ascendente)
+        const sortedMovies = filteredMovies.sort((a, b) => {
+            if (a.title < b.title) return -1; // a viene antes que b
+            if (a.title > b.title) return 1;  // b viene antes que a
+            return 0; // son iguales
+        });
+    
+        const totalMovies = sortedMovies.length;
         const offset = currentPage * itemsPerPage;
-        const currentItems = filteredMovies.slice(offset, offset + itemsPerPage);
-
+        const currentItems = sortedMovies.slice(offset, offset + itemsPerPage);
+    
         return (
             <Container ref={ref}>
                 <Row className="g-3 mb-3">
                     <Col sm={6} md={4} lg={3}>
                         <Form.Group controlId="yearFilter">
                             <Form.Label>Filtrar por año</Form.Label>
-                            <div className="d-flex flex-column"> 
+                            <div className="d-flex flex-column">
                                 <DatePicker
                                     selected={yearFilter}
                                     onChange={handleYearChange}
                                     showYearPicker
                                     dateFormat="yyyy"
                                     placeholderText="Selecciona un año"
-                                    className="form-control" 
+                                    className="form-control"
                                     yearItemNumber={12}
                                     minDate={new Date("1801-01-01")}
                                     maxDate={new Date()}
@@ -83,7 +91,7 @@ export default function Peliculas() {
                             </div>
                         </Form.Group>
                     </Col>
-
+    
                     <Col sm={6} md={4} lg={3}>
                         <Form.Group controlId="itemsPerPage">
                             <Form.Label>Resultados por página</Form.Label>
@@ -94,7 +102,7 @@ export default function Peliculas() {
                             </Form.Control>
                         </Form.Group>
                     </Col>
-
+    
                     <Col className="ms-auto">
                         <ReactPaginate
                             previousLabel={'Anterior'}
@@ -111,7 +119,7 @@ export default function Peliculas() {
                         />
                     </Col>
                 </Row>
-
+    
                 <Row className="g-4">
                     {currentItems.map((movie, index) => (
                         <Col key={index} sm={6} md={4} lg={3} xl={2}>
@@ -124,20 +132,7 @@ export default function Peliculas() {
                         </Col>
                     ))}
                 </Row>
-
-                {/* <Overlay target={target} show={show} placement="right">
-                    {(props) => (
-                        <Tooltip id="overlay-example" {...props}>
-                            {selectedMovie && (
-                                <div>
-                                    <h5>{selectedMovie.title}</h5>
-                                    <p>{selectedMovie.description}</p>
-                                </div>
-                            )}
-                        </Tooltip>
-                    )}
-                </Overlay> */}
-
+    
                 <Modal show={showModal} onHide={() => setShowModal(false)}>
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedMovie?.title}</Modal.Title>
